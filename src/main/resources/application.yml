@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: mcp-spring-java
+  main:
+    banner-mode: off
+  ai:
+    mcp:
+      server:
+        enabled: true
+        name: my-dummy-users-server
+        version: 0.0.1
+        type: SYNC
+        stdio: true
+        sse-message-endpoint: /mcp/message
+        resource-change-notification: true
+        tool-change-notification: true
+        prompt-change-notification: true
+
+server:
+  port: 8090
+#  servlet:
+#    context-path: /mcp
+
+logging:
+  file:
+    name: ./target/starter-webmvc-server.log

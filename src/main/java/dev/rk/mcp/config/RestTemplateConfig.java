@@ -1,5 +1,6 @@
 package dev.rk.mcp.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
@@ -10,6 +11,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.SSLContext;
@@ -18,7 +20,7 @@ import javax.net.ssl.SSLContext;
 public class RestTemplateConfig {
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) throws Exception {
+    public RestTemplate restTemplate(RestTemplateBuilder builder, ObjectMapper objectMapper) throws Exception {
         // Create SSL context that trusts all certificates
         SSLContext sslContext = SSLContextBuilder
                 .create()
@@ -43,8 +45,13 @@ public class RestTemplateConfig {
         HttpComponentsClientHttpRequestFactory requestFactory = 
                 new HttpComponentsClientHttpRequestFactory(httpClient);
 
+        // Create a message converter with the shared ObjectMapper
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(objectMapper);
+
         return builder
                 .requestFactory(() -> requestFactory)
+                .additionalMessageConverters(converter)
                 .build();
     }
 }

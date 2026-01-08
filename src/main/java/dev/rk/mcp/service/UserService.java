@@ -36,7 +36,9 @@ public class UserService {
   public UsersResponse getAllUsers(int limit, int skip) {
     String url = BASE_URL + "/users?limit=" + limit + "&skip=" + skip;
     System.out.println("getAllUsers: " + url);
-    return restTemplate.getForObject(url, UsersResponse.class);
+    UsersResponse usersResponse = restTemplate.getForObject(url, UsersResponse.class);
+    System.out.println("getAllUsers - Call to fetch data completed: " + url);
+    return usersResponse;
   }
 
   /**
@@ -48,7 +50,9 @@ public class UserService {
   public UsersResponse getAllUsers() {
     String url = BASE_URL + "/users";
     System.out.println("getAllUsersDefault: " + url);
-    return restTemplate.getForObject(url, UsersResponse.class);
+    UsersResponse usersResponse = restTemplate.getForObject(url, UsersResponse.class);
+    System.out.println("getAllUsersDefault - Call to fetch data completed: " + url);
+    return usersResponse;
   }
 
   /**

@@ -10,7 +10,7 @@ spring:
         name: my-dummy-users-server
         version: 0.0.1
         type: SYNC
-        stdio: true
+        stdio: false
         sse-message-endpoint: /mcp/message
         resource-change-notification: true
         tool-change-notification: true

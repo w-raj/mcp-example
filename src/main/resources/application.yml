@@ -3,6 +3,11 @@ spring:
     name: mcp-spring-java
   main:
     banner-mode: off
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+    deserialization:
+      fail-on-unknown-properties: false
   ai:
     mcp:
       server:
@@ -11,16 +16,30 @@ spring:
         version: 0.0.1
         type: SYNC
         stdio: false
+        transport: http
+        http-endpoint: http://localhost:8090/mcp/message
         sse-message-endpoint: /mcp/message
+#        sseEndpoint : /mcp/sse
+#        sseMessageEndpoint: /mcp/sse/message
         resource-change-notification: true
         tool-change-notification: true
         prompt-change-notification: true
-
+  web:
+    resources:
+      add-mappings: false
 server:
   port: 8090
-#  servlet:
-#    context-path: /mcp
+  address: 0.0.0.0  
 
 logging:
   file:
     name: ./target/starter-webmvc-server.log
+  level:
+    org.springframework.web.client: DEBUG
+    org.apache.http: DEBUG
+    org.springframework.ai: TRACE
+    org.springframework.ai.mcp: TRACE
+    org.springframework.ai.tool: TRACE
+    org.springframework.web.servlet.function.support.RouterFunctionMapping: TRACE
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
+    dev.rk.mcp: DEBUG

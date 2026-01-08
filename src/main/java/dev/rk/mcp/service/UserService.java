@@ -64,8 +64,31 @@ public class UserService {
   @Tool(name = "getUserById", description = "Get a single user by ID")
   public User getUserById(int id) {
     String url = BASE_URL + "/users/" + id;
-    System.out.println("getUserById: " + url);
-    return restTemplate.getForObject(url, User.class);
+    System.out.println("\n=== getUserById CALLED with ID: " + id + " ===");
+    System.out.println("URL: " + url);
+    
+    try {
+      User user = restTemplate.getForObject(url, User.class);
+      
+      if (user == null) {
+        System.out.println("ERROR: RestTemplate returned NULL");
+        return null;
+      }
+      
+      System.out.println("SUCCESS: User object received from API");
+      System.out.println("  - ID: " + user.getId());
+      System.out.println("  - First Name: " + user.getFirstName());
+      System.out.println("  - Last Name: " + user.getLastName());
+      System.out.println("  - Email: " + user.getEmail());
+      System.out.println("Returning User object - should now be serialized by custom ToolCallResultConverter");
+      System.out.println("=== END getUserById ===");
+      
+      return user;
+    } catch (Exception e) {
+      System.out.println("EXCEPTION in getUserById: " + e.getClass().getName() + " - " + e.getMessage());
+      e.printStackTrace();
+      throw e;
+    }
   }
 
   /**

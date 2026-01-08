@@ -3,7 +3,6 @@ package dev.rk.mcp.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -19,12 +18,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.removeIf(converter -> converter instanceof MappingJackson2HttpMessageConverter);
-        
-        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-        jsonConverter.setObjectMapper(objectMapper);
-        converters.add(jsonConverter);
-        
+        // In Spring Boot 4.0, message converters are auto-configured with the ObjectMapper bean
+        // The shared ObjectMapper will be used automatically
         System.out.println("=== MVC Message Converters Configured ===");
         System.out.println("Using shared ObjectMapper for HTTP responses");
     }

@@ -15,12 +15,8 @@ spring:
         name: my-dummy-users-server
         version: 0.0.1
         type: SYNC
+        protocol: STREAMABLE  # Use STATELESS for simple HTTP POST/response transport, SSE for session based flow
         stdio: false
-        transport: http
-        http-endpoint: http://localhost:8090/mcp/message
-        sse-message-endpoint: /mcp/message
-#        sseEndpoint : /mcp/sse
-#        sseMessageEndpoint: /mcp/sse/message
         resource-change-notification: true
         tool-change-notification: true
         prompt-change-notification: true

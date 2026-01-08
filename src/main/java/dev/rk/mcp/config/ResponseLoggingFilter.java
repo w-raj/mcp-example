@@ -20,7 +20,7 @@ public class ResponseLoggingFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         
-        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(httpRequest);
+        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(httpRequest, 1024);
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(httpResponse);
         
         long startTime = System.currentTimeMillis();

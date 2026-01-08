@@ -1,10 +1,8 @@
 package dev.rk.mcp.service;
 
-import dev.rk.mcp.model.User;
-import dev.rk.mcp.model.UsersResponse;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Map;
+
 import org.springframework.ai.tool.annotation.Tool;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,7 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
+import dev.rk.mcp.model.User;
+import dev.rk.mcp.model.UsersResponse;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j

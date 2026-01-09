@@ -15,7 +15,8 @@ spring:
         name: my-dummy-users-server
         version: 0.0.1
         type: SYNC
-        protocol: STREAMABLE  # Use STATELESS for simple HTTP POST/response transport, SSE for session based flow
+        #protocol: STATELESS  # Use STATELESS for simple HTTP POST/response transport, SSE for session based flow, STREAMABLE for Mcp session based flow
+        protocol: STREAMABLE  # Use STATELESS for simple HTTP POST/response transport, SSE for session based flow, STREAMABLE for Mcp session based flow
         stdio: false
         resource-change-notification: true
         tool-change-notification: true
@@ -23,6 +24,12 @@ spring:
   web:
     resources:
       add-mappings: false
+
+# JWT Configuration
+jwt:
+  secret: mySecretKeyForJWTTokenValidation1234567890123456
+  expiration: 86400000  # 24 hours in milliseconds
+
 server:
   port: 8090
   address: 0.0.0.0  

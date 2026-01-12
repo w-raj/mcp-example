@@ -7,7 +7,7 @@ mvn clean package -DskipTests
 
 
 # Java Command to run the server
-java -jar /Users/e1082872/mcp-server-spring-java/target/mcp-spring-java-0.0.1-SNAPSHOT.jar
+java -jar /mcp-server-spring-java/target/mcp-spring-java-0.0.1-SNAPSHOT.jar
 
 ## Alternatively, you may use
 mvn spring-boot:run
